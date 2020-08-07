@@ -1,0 +1,101 @@
+*, 
+*:before, 
+*:after {
+    box-sizing: border-box;
+};
+
+body {
+    padding: 0;
+    margin: 0;
+    font-size: 20px;
+    overflow: hidden;
+    font-family: 'open sans', helvetica, arial;
+};
+
+nav {
+    position: relative;
+    left: 0;
+    background-color: white;
+};
+
+.nav-group {
+    list-style: none;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    box-shadow: 0 0 18px black;
+    transition: all 200ms linear;
+    -webkit-transition: all 200ms linear;
+    -moz-transition: all 200ms linear;
+    -ms-transition: all 200ms linear;
+    -o-transition: all 200ms linear;
+    margin: 0;
+    padding: 8px;
+};
+    
+.nav-group:hover {
+    transition: all 200ms linear;
+    -webkit-transition: all 200ms linear;
+    -moz-transition: all 200ms linear;
+    -ms-transition: all 200ms linear;
+    -o-transition: all 200ms linear;
+    border-bottom-color: black;
+    box-shadow: 0 0 23px black;
+};
+    
+.nav-item-row {
+    display: inline-block;
+    padding: 8px;
+};
+    
+.nav-item {
+    color: black;
+    text-decoration: none;
+    border-bottom-style: solid;
+    border-bottom-color: transparent;
+    border-bottom-width: 0px;
+    transition: all 150ms linear;
+    -webkit-transition: all 150ms linear;
+    -moz-transition: all 150ms linear;
+    -ms-transition: all 150ms linear;
+    -o-transition: all 150ms linear;
+};
+    
+.nav-item:hover {
+    transition: all 150ms linear;
+    -webkit-transition: all 150ms linear;
+    -moz-transition: all 150ms linear;
+    -ms-transition: all 150ms linear;
+    -o-transition: all 150ms linear;
+    color: black;
+    border-bottom-style: double;
+    border-bottom-color: black;
+    border-bottom-width: 1px;
+};
+
+.main-container { 
+    position: relative;
+    width: 100%;
+    flex-direction: row;
+    font-family: "inherit";
+    align-self: center;
+    align-items: flex-start;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+};
+
+h2 {
+    color: black;
+    font-family: 'inherit';
+    font-size: 1.35em;
+    display: block;
+    width: 100%;
+    text-transform: none;
+    padding: 1em;
+    margin: 0;
+    font-weight: 200;
+};
+
+ul, h4 {
+    text-align: start;
+};
