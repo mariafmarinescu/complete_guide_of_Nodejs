@@ -135,11 +135,11 @@ exports.postOrder = (req, res, next) => {
 
 exports.getOrders = (req, res, next) => {
     req.user
-        .getOrders({ include: ['products'] });
+        .getOrders({ include: ['products'] })
         .then(orders => {
             res.render('shop/orders', {
                 path: '/orders', 
-                pageTitle: 'Personal Orders'
+                pageTitle: 'Personal Orders',
                 orders: orders
             });
         }).catch(err => console.log(err));
