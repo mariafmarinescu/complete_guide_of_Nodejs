@@ -2,7 +2,8 @@ const mongoose = required('mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-    name: String,
+  name: { 
+    type: String,
     required: true
   },
   email: {
@@ -28,7 +29,7 @@ userSchema.methods.addToCart = function(product) {
         return cp.productId.toString() === product._id.toString();
     });
     
-    let newQuantity: 1;
+    let newQuantity = 1;
     const updatedCartItems = [ ...this.cart.items ];
 
     if(cartProductIndex >= 0) {
@@ -57,7 +58,7 @@ userSchema.methods.removeFromCart = function(productId) {
     return this.save();
 };
 
-userSchema.methods.clearCart = function() => {
+userSchema.methods.clearCart = function() {
     this.cart = { items: [] };
     return this.save();
 };
