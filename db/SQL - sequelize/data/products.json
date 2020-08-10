@@ -1,0 +1,16 @@
+[
+    {
+        "id": "123245",
+        "title": "Mars",
+        "imageUrl": "https://cdn.pixabay.com/photo/2011/12/13/14/30/mars-11012_1280.jpg",
+        "description": "Mars can be yours to keep!",
+        "price": "44444000000"
+    },
+    {
+        "id": "4444",
+        "title": "Earth",
+        "imageUrl": "https://cdn.pixabay.com/photo/2011/12/13/14/31/earth-11015_1280.jpg",
+        "description": "Earth can have only one king / buyer!",
+        "price": "900999000000000"
+    }
+]
