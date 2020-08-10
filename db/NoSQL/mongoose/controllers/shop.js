@@ -10,7 +10,7 @@ exports.getProducts = (req, res, next) => {
                 pageTitle: 'All Planets', 
                 path: '/products'
             });
-        }.catch(err => {
+        }).catch(err => {
             console.log(err);
         });
 };

@@ -2,12 +2,14 @@ const path = require('path');
 
 const express = require('express');
 const bodyParser = require('body-parser');
-const dotenv = require('dotenv');
-dotenv.config();
+
 const mongoose = require('mongoose');
 
+const dotenv = require('dotenv');
+dotenv.config();
+
 const errorsController = require('./controllers/errors');
-const User = require('.models/user');
+const User = require('./models/user');
 
 const app = express();
 
@@ -50,7 +52,7 @@ mongoose
         user.save();
       }
     });
-    app.listen(3000, () => console.log('This simple app is listening on port 3000!'));
+    app.listen(`${process.env.PORT}`, () => console.log(`This simple app is listening on port ${process.env.PORT}!`));
   })
   .catch(err => {
     console.log(err);
