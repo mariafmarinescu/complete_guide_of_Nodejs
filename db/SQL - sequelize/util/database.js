@@ -1,9 +1,12 @@
-const Sequalize = require('sequelize');
+const dotenv = require('dotenv');
+dotenv.config();
+
+const Sequelize = require('sequelize');
 
 
-const sequalize = new Sequalize('nodejs', 'root', 'passwordHere', { 
+const sequelize = new Sequelize(`${process.env.SQL_DB}`, 'root', `${process.env.SQL_PASS}`, { 
     dialect: 'mysql', 
-    host: 'localhost' 
+    host: `${SQL_HOST}` 
 });
 
-module.exports = sequalize;
+module.exports = sequelize;
