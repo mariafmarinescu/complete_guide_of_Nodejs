@@ -4,6 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 dotenv.config();
+const mongoose = require('mongoose');
 
 const errorsController = require('./controllers/errors');
 const User = require('.models/user');
@@ -31,7 +32,7 @@ app.use((req, res, next) => {
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 
-app.use(errorController.get404);
+app.use(errorsController.get404);
 
 mongoose
   .connect(
