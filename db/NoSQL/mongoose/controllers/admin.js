@@ -15,7 +15,7 @@ exports.postAddProduct = (req, res, next) => {
     const price = req.body.price;
     const description = req.body.description;
     const product = new Product({
-        title: title,
+            title: title,
             price: price, 
             imageUrl: imageUrl,
             description: description
@@ -36,7 +36,7 @@ exports.getEditProduct = (req, res, next) => {
         return res.redirect('/');
     }
     const prodId = req.params.productId;
-    Product.findById(productId)
+    Product.findById(prodId)
         .then(product => {
             if(!product) {
                 return res.redirect('/');
