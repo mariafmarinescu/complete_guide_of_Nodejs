@@ -2,7 +2,7 @@ const Product = require('../models/product');
 
 exports.getAddProduct = (req, res, next) => {
   res.render('admin/edit-product', {
-    pageTitle: 'Add Product',
+    pageTitle: 'Add Planet',
     path: '/admin/add-product',
     editing: false
   });
@@ -24,7 +24,7 @@ exports.postAddProduct = (req, res, next) => {
   product
     .save()
     .then(result => {
-      console.log('product created successfully');
+      console.log('A new product was created successfully!');
       res.redirect('/admin/products');
     })
     .catch(err => {
@@ -70,7 +70,7 @@ exports.postEditProduct = (req, res, next) => {
   product
     .save()
     .then(result => {
-      console.log('product updated');
+      console.log('Product successfully updated!');
       res.redirect('/admin/products');
     })
     .catch(err => console.log(err));
@@ -81,7 +81,7 @@ exports.getProducts = (req, res, next) => {
     .then(products => {
       res.render('admin/products', {
         prods: products,
-        pageTitle: 'Admin Products',
+        pageTitle: 'Admin, this are your planets',
         path: '/admin/products'
       });
     })
@@ -92,7 +92,7 @@ exports.postDeleteProduct = (req, res, next) => {
   const prodId = req.body.productId;
   Product.deleteById(prodId)
     .then(() => {
-      console.log('product deleted successfully');
+      console.log('Product successfully deleted!');
       res.redirect('/admin/products');
     })
     .catch(err => console.log(err));

@@ -72,7 +72,6 @@ exports.postCartDeleteProduct = (req, res, next) => {
 };
 
 exports.postOrder = (req, res, next) => {
-  let fetchedCart;
   req.user
     .addOrder()
     .then(result => {
@@ -87,7 +86,7 @@ exports.getOrders = (req, res, next) => {
     .then(orders => {
       res.render('shop/orders', {
         path: '/orders',
-        pageTitle: 'Your Orders',
+        pageTitle: 'Your Planets - Orders',
         orders: orders
       });
     })

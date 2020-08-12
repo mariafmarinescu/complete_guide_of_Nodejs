@@ -1,17 +1,15 @@
 const dotenv = require('dotenv');
 dotenv.config();
 
-const mongodb = require('mongodb');
-const MongoClient = mongodb.MongoClient;
+const MongoClient = require('mongodb').MongoClient;
+const uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.PASS}@cluster0.zj50u.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 
 
 let _db;
 const mongoConnect = callback => {
-    MongoClient.connect(
-        `mongodb+srv://${process.env.MONGO_USER}:${process.env.PASS}@cluster0.zj50u.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`
-    )
+    MongoClient.connect(uri, { useNewUrlParser: true })
         .then(client => {
-            console.log('Connected to db');
+            console.log('Successfully connected to the database!');
             callback(client);
         })
         .catch(err => {

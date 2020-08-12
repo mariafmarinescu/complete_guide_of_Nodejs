@@ -8,6 +8,7 @@ class Product {
       this.imageUrl = imageUrl;
       this.description = description;
       this.price = price;
+      this.userId = this.userId;
   }
 
   save() {
@@ -37,31 +38,30 @@ class Product {
         .then(products => {
           console.log(products);
           return products;
-        }).catch(err => {console.log(err)});
+        }).catch(err => { console.log(err) });
     }
 
     static findById(prodId) {
       const db = getDb();
       return db
         .collection('products')
-        .find({ _id: new mongodb.ObjectId(prodId)})
+        .find({ _id: new mongodb.ObjectId(prodId) })
         .next()
         .then(products => {
           console.log(products);
           return products;
-        }).catch(err => {console.log(err)});
+        }).catch(err => { console.log(err) });
     }
 
     static deleteById(prodId) {
       const db = getDb();
       return db
         .collection('products')
-        .find({ _id: new mongodb.ObjectId(prodId)})
-        .then(products => {
-          console.log('product deleted successfully');
+        .find({ _id: new mongodb.ObjectId(prodId) })
+        .then(result => {
+          console.log('Product successfully deleted!');
         }).catch(err => {console.log(err)});
     }
-
 };
 
 module.exports = Product;
