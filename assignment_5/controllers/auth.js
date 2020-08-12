@@ -3,13 +3,13 @@ const User = require('../models/user');
 exports.getLogin = (req, res, next) => {
     res.render('auth/login', {
         path: '/login',
-        pageTitle: 'Login', 
+        pageTitle: 'Admin, login!', 
         isAuthenticated: false
     });
 };
 
 exports.postLogin = (req, res, next) => {
-    User.findById('IDnumber') //todo : find whaaat is this
+    User.findById('')
         .then(user => {
             req.session.isLoggedIn = true;
             req.session.user = user;

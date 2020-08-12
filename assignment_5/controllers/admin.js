@@ -44,7 +44,7 @@ exports.getEditProduct = (req, res, next) => {
                 return res.redirect('/');
             }
             res.render('admin/edit-product', {
-                pageTitle: 'Edit this product',
+                pageTitle: 'Edit this planet',
                 path: 'admin/edit-product',
                 editing: editMode,
                 product: product, 
@@ -70,7 +70,7 @@ exports.postEditProduct = (req, res, next) =>{
     product
         .save()
         .then(result =>{
-            console.log('product updated')
+            console.log('Product successfully updated!')
             res.redirect('/admin/products');
         })
         .catch(err => console.log(err));
@@ -83,7 +83,7 @@ exports.getProducts = (req, res, next) => {
         .then(products => {
             res.render('admin/products', {
                 prods: products, 
-                pageTitle: "Admin Products",
+                pageTitle: "Admin planets",
                 path: '/admin/products', 
                 isAuthenticated: req.session.isLoggedIn
             });
@@ -96,7 +96,7 @@ exports.postDeleteProduct = (req, res, next) => {
     const prodId = req.body.productId;
     Product.deleteById(prodId)
         .then(() => {
-            console.log('product deleted successfully');
+            console.log('Product successfully deleted');
             res.redirect('/admin/products');
         }).catch(err => console.log(err))
 };
