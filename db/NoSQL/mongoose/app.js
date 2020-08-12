@@ -23,7 +23,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {
-  User.findById('5bab316ce0a7c75f783cb8a8')
+  prodId = req.user.prodId;
+  User.findById(prodId)
     .then(user => {
       req.user = user;
       next();
@@ -40,7 +41,8 @@ mongoose
   .connect(
     `mongodb+srv://${process.env.MONGO_USER}:${process.env.PASS}@cluster0.zj50u.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`  )
   .then(result => {
-    User.findOne().then(user => {
+    prodId = req.user.prodId;
+    User.findOne(prodId).then(user => {
       if (!user) {
         const user = new User({
           name: 'Test',
