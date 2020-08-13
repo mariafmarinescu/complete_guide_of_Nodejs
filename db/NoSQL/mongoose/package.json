@@ -16,10 +16,10 @@
     "express-handlebars": "^5.1.0",
     "mongodb": "^3.6.0",
     "mongoose": "^5.9.28",
-    "sequelize": "^6.3.4"
+    "sequelize": "^6.3.4",
+    "dotenv": "^8.2.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4",
-    "dotenv": "^8.2.0"
+    "nodemon": "^2.0.4"
   }
 }
