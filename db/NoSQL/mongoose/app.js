@@ -38,19 +38,14 @@ const uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@p
 
 mongoose
   .connect(uri, { useNewUrlParser: true }  ).then(result => {
-    // prodId = req.users.productId;
-    // User.findOne(prodId).then(user => {
-    //   if (!user) {
-    //     const user = new User({
-    //       name: 'Test',
-    //       email: 'testy@test.com',
-    //       cart: {
-    //         items: []
-    //       }
-    //     });
-    //     user.save();
-    //   }
-    // });
+      const user = new User({
+        name: 'PlanetKing',
+        email: 'king@planet.com',
+        cart: {
+          items: []
+        }
+      });
+      user.save();
     app.listen(`${process.env.PORT}`, () => console.log(`This simple app is listening on port ${process.env.PORT}!`));
   }).catch(err => {
     console.log(err);
