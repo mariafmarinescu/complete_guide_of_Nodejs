@@ -19,7 +19,8 @@ exports.postAddProduct = (req, res, next) => {
             title: title,
             price: price, 
             imageUrl: imageUrl,
-            description: description
+            description: description,
+            userId: req.user
     });
     product
         .save()
@@ -29,6 +30,7 @@ exports.postAddProduct = (req, res, next) => {
          })
             .catch(err => {
                 console.log(err);
+                throw err;
             });
 };
 
@@ -44,13 +46,16 @@ exports.getEditProduct = (req, res, next) => {
                 return res.redirect('/');
             }
             res.render('admin/edit-product', {
-                pageTitle: 'Edit this product',
+                pageTitle: 'Edit this planet',
                 path: 'admin/edit-product',
                 editing: editMode,
                 product: product
             });
         })
-        .catch(err => console.log(err));        
+        .catch(err => {
+            console.log(err);
+            throw err;
+        });        
 };
 
 
@@ -60,6 +65,7 @@ exports.postEditProduct = (req, res, next) =>{
     const updatedPrice = req.body.price;
     const updatedImageUrl = req.body.imageUrl;
     const updatedDesc = req.body.description;
+
     Product.findById(prodId)
         .then(product => {
             product.title = updatedTitle;
@@ -67,10 +73,14 @@ exports.postEditProduct = (req, res, next) =>{
             product.description = updatedDesc;
             product.imageUrl = updatedImageUrl;
             return product.save();
-        }).then(result =>{
-            console.log('product updated')
+        })
+        .then(result =>{
+            console.log('Product successfully updated!')
             res.redirect('/admin/products');
-        }).catch(err => console.log(err));
+        }).catch(err => {
+            console.log(err);
+            throw err;
+        });        
 };
 
 
@@ -79,11 +89,14 @@ exports.getProducts = (req, res, next) => {
         .then(products => {
             res.render('admin/products', {
                 prods: products, 
-                pageTitle: "Admin Products",
+                pageTitle: "Admin Planets",
                 path: '/admin/products'
             });
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+            console.log(err);
+            throw err;
+        });
 };
 
 
@@ -91,7 +104,10 @@ exports.postDeleteProduct = (req, res, next) => {
     const prodId = req.body.productId;
     Product.findByIdAndRemove(prodId)
         .then(() => {
-            console.log('product deleted successfully');
+            console.log('Product successfully deleted!');
             res.redirect('/admin/products');
-        }).catch(err => console.log(err))
+        }).catch(err => {
+            console.log(err);
+            throw err;
+        });
 };
