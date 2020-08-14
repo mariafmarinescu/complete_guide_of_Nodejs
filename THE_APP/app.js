@@ -32,7 +32,11 @@ app.use(helmet());
 app.use(cookieParser());
 
 
-app.options('*', cors());
+app.options( '*', cors({
+  origin: ['*'],
+  method: ['GET'],
+  maxAgeSeconds: 3600
+}));
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
