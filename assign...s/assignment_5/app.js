@@ -11,6 +11,8 @@ const session = require('express-session');
 const mongoose = require('mongoose');
 const MongoDBStore = require('connect-mongodb-session')(session);
 
+const User = require('./models/user');
+
 const errorController = require('./controllers/error');
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
@@ -19,19 +21,12 @@ const authRoutes = require('./routes/auth');
 const isLoggedIn = require("./middleware/isLoggedIn.js");
 
 const app = express();
+app.use(bodyParser.urlencoded({ extended: false }));
 
 const store = new MongoDBStore({
   uri: admin_MONGO_URI,
   collection: 'sessions'
 });
-
-
-
-
-const User = require('./models/user');
-
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
   secret: 'hardcoded secret',
@@ -40,6 +35,8 @@ app.use(session({
   store: store
 }));
 
+
+app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
@@ -47,21 +44,15 @@ app.use(errorController.get404);
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 app.use(authRoutes);
-
-
   // async ( req, res ) => {
   // const sessionSecrets = await Store.getSessionSecrets();
 
-  
   // })( req, res );
 // });
 
 
-
-
-
 mongoose
-  .connect(admin_MONGO_URI, { useNewUrlParser: true })
+  .connect(admin_MONGO_URI)
   .then(result => {
     User.findOne().then(user => {
       if (!user) {
