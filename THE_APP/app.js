@@ -39,11 +39,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(
   session({
-    secret: 'thePlanetItselfIsTHEsECRET',
+    secret: 'hardcoded',
     resave: false,
     saveUninitialized: false,
-    store: store,
-    cookie: { maxAge: 60000 }
+    store: store
   })
 );
 app.use(csrfProtection);
@@ -58,15 +57,10 @@ app.use((req, res, next) => {
       next();
     }).catch(err => console.log(err));
 });
-
 app.use(errorController.get404);
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 app.use(authRoutes);
-
-
-
-
 
 mongoose
   .connect(admin_MONGO_URI)
