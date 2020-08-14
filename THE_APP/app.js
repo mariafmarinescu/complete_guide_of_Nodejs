@@ -8,7 +8,9 @@ const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const csrf = require('csurf');
 const flash = require('connect-flash');
-const helmet = require('helmet')
+const helmet = require('helmet');
+const cookieParser = require('cookie-parser');
+
 
 
 const dotenv = require('dotenv');
@@ -26,7 +28,9 @@ const cors = require('cors');
 const User = require('./models/user');
 
 const app = express();
-app.use(helmet())
+app.use(helmet());
+app.use(cookieParser());
+
 
 app.options('*', cors());
 
