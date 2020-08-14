@@ -51,6 +51,7 @@ exports.postLogin = (req, res, next) => {
           if (doMatch) {
             req.session.isLoggedIn = true;
             req.session.user = user;
+
             return req.session.save(err => {
               console.log(err);
               res.redirect('/');
@@ -59,6 +60,7 @@ exports.postLogin = (req, res, next) => {
           req.flash('error', 'Incorrect credentials.');
           res.redirect('/login');
         }).catch(err => {
+
           console.log(err);
           res.redirect('/login');
         });
