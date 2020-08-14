@@ -1,0 +1,39 @@
+main {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+@for $i from 1 through 44 { 
+  .cart_list:nth-child(#{$i})::after {
+    content: "$i == #{$i}";
+    color: hsl($i * 10, 50%, 50%);
+  }
+}
+.cart_list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin: auto;
+  width: 40rem;
+  max-width: 77%;
+  box-shadow: 5px 5px 10px purple, -7px -4px 4px green;
+}
+
+.cart_item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1.7rem;
+}
+
+.cart_item h2 {
+  margin-right: 0.7rem;
+  font-size: 1.2rem;
+  margin: 0;
+}
+
