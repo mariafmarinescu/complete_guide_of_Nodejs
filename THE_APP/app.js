@@ -3,9 +3,13 @@ const mongoose = require('mongoose');
 
 
 const express = require('express');
-const MongoDBStore = require('connect-mongodb-session')(session);
+const session = require('express-session');
 
-const app = express();
+const MongoDBStore = require('connect-mongodb-session')(session);
+const csrf = require('csurf');
+const flash = require('connect-flash');
+
+
 const dotenv = require('dotenv');
 dotenv.config();
 
@@ -17,33 +21,49 @@ const shopRoutes = require('./routes/shop');
 const authRoutes = require('./routes/auth');
 
 const User = require('./models/user');
-
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
+const app = express();
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
 const admin_MONGO_URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@planetcluster.4uagb.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
+const csrfProtection = csrf();
 const store = new MongoDBStore({
-  uri: MONGODB_URI,
+  uri: admin_MONGO_URI,
   collection: 'sessions'
 });
 
+
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(
+  session({
+    secret: 'thePlanetItselfIsTHEsECRET',
+    resave: false,
+    saveUninitialized: false,
+    store: store,
+    cookie: { maxAge: 60000 }
+  })
+);
+app.use(csrfProtection);
+app.use(flash());
+app.use((req, res, next) => {
+  if(!req.session.user) {
+    return next();
+  }
+  User.findById(req.session.user._id)
+    .then(user => {
+      req.user = user;
+      next();
+    }).catch(err => console.log(err));
+});
 
 app.use(errorController.get404);
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 app.use(authRoutes);
 
-app.use(
-  session({
-    secret: 'thePlanetItselfIsTHEsECRET',
-    resave: false,
-    saveUninitialized: false,
-    store: store
-  })
-);
 
 
 
@@ -51,18 +71,6 @@ app.use(
 mongoose
   .connect(admin_MONGO_URI)
   .then(result => {
-    User.findOne().then(user => {
-      if (!user) {
-        const user = new User({
-          name: 'PlanetKing',
-          email: 'king@planet.com',
-          cart: {
-            items: []
-          }
-        });
-        user.save();
-      }
-    });
     app.listen(
       `${process.env.PORT}`, 
       () => console.log(`This simple app is listening on port ${process.env.PORT}!`));

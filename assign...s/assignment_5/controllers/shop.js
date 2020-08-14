@@ -7,10 +7,10 @@ exports.getProducts = (req, res, next) => {
       console.log(products);
       res.render('shop/planet-list', {
         prods: products,
+        isAuthenticated: req.session.isloggedin,
         pageTitle: 'All planets',
-        path: '/planets',
-        isAuthenticated: req.session.isLoggedIn
-      });
+        path: '/planets'
+      })
     })
     .catch(err => {
       console.log(err);
@@ -22,10 +22,10 @@ exports.getProduct = (req, res, next) => {
   Product.findById(prodId)
     .then(product => {
       res.render('shop/planet-detail', {
+        isAuthenticated: req.session.isloggedin,
         product: product,
         pageTitle: product.title,
-        path: '/planets',
-        isAuthenticated: req.session.isLoggedIn
+        path: '/planets'
       });
     })
     .catch(err => console.log(err));
@@ -35,10 +35,10 @@ exports.getIndex = (req, res, next) => {
   Product.find()
     .then(products => {
       res.render('shop/index', {
+        isAuthenticated: req.session.isloggedin,
         prods: products,
         pageTitle: 'Shop',
-        path: '/',
-        isAuthenticated: req.session.isLoggedIn
+        path: '/'
       });
     })
     .catch(err => {
@@ -52,11 +52,12 @@ exports.getCart = (req, res, next) => {
     .execPopulate()
     .then(user => {
       const products = user.cart.items;
+
       res.render('shop/cart', {
+        isAuthenticated: req.session.isloggedin,
         path: '/cart',
         pageTitle: 'Cart - your planets',
-        products: products,
-        isAuthenticated: req.session.isLoggedIn
+        products: products
       });
     })
     .catch(err => console.log(err));
@@ -114,10 +115,10 @@ exports.getOrders = (req, res, next) => {
   Order.find({ 'user.userId': req.session.user._id })
     .then(orders => {
       res.render('shop/orders', {
+        isAuthenticated: req.session.isloggedin,
         path: '/orders',
         pageTitle: 'Your Orders',
-        orders: orders,
-        isAuthenticated: req.session.isLoggedIn
+        orders: orders      
       });
     })
     .catch(err => console.log(err));

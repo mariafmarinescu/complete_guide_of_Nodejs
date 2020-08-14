@@ -6,13 +6,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "scss": "node-sass --watch ./style/cart.scss -o .public/cart.css",
-    "start": "node-sass ./style/cart.scss -o ../public/css/ && nodemon app.js -e ejs,css,js,json, .env",
-    "trace": "node app.js --trace-deprecation"
+    "start": "node-sass ./style/cart.scss -o ../public/css/ && nodemon app.js -e ejs,css,js,json,env",
+    "trace": "node app.js --trace-deprecation",
+    "lint": "eslint ."
   },
   "author": "M.M.",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "client-sessions": "^0.8.0",
     "connect-mongodb-session": "^2.0.3",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.3",
@@ -24,6 +26,9 @@
     "sequelize": "^6.3.4"
   },
   "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.6.0",
+    "eslint-loader": "^4.0.2",
     "nodemon": "^2.0.4"
   }
 }

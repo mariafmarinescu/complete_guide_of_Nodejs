@@ -1,7 +1,6 @@
 const path = require('path');
 const express = require('express');
 
-const isLoggedIn = require("../middleware/isLoggedIn.js");
 
 const router = express.Router();
 
@@ -9,17 +8,17 @@ const router = express.Router();
 const adminController = require('../controllers/admin');
 
 
-router.get('/add-planet', adminController.getAddProduct);
+router.get('/add-product', adminController.getAddProduct);
 
-router.get('/planets', adminController.getProducts);
+router.get('/products', adminController.getProducts);
 
-router.post('/add-planet', adminController.postAddProduct);
+router.post('/add-product', adminController.postAddProduct);
 
-router.get('/edit-planet/:productId', adminController.getEditProduct);
+router.get('/edit-product/:productId', adminController.getEditProduct);
 
-router.post('/edit-planet', adminController.postEditProduct);
+router.post('/edit-product', adminController.postEditProduct);
 
-router.post('/delete-planet', adminController.postDeleteProduct);
+router.post('/delete-product', adminController.postDeleteProduct);
 
 module.exports = router;
 

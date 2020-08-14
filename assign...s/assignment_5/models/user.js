@@ -66,4 +66,18 @@ userSchema.methods.clearCart = function() {
   return this.save();
 };
 
+
+userSchema.pre('validate', function() {
+  console.log('valid - checked');
+});
+userSchema.post('validate', function() {
+  console.log('valid - known');
+});
+userSchema.pre('save', function() {
+  console.log('save - registered');
+});
+userSchema.post('save', function() {
+  console.log('saved successfully');
+});
+
 module.exports = mongoose.model('User', userSchema);

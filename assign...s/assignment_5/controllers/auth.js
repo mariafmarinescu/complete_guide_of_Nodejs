@@ -9,10 +9,21 @@ exports.getLogin = (req, res, next) => {
 };
 
 exports.postLogin = (req, res, next) => {
+  if (!user) {
+    const user = new User({
+      name: 'PlanetKing',
+      email: 'king@planet.com',
+      cart: {
+        items: []
+      }
+    });
+    user.save();
+  } else {
 
-  User.findById('5f35529cfdb51b152ffd559f')
+  }
+  User.find(req.user)
     .then(user => {
-      req.session.isLoggedIn = true;
+      req.session.isloggedin = true;
       req.session.user = user;
       res.redirect('/');
     })

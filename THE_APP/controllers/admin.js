@@ -1,12 +1,10 @@
 const Product = require('../models/product');
 
-
 exports.getAddProduct = (req, res, next) => {
-  res.render('admin/edit-planet', {
+  res.render('admin/edit-product', {
     pageTitle: 'Add Planet',
-    path: '/admin/add-planet',
-    editing: false,
-    isAuthenticated: req.session.isLoggedIn
+    path: '/admin/add-product',
+    editing: false
   });
 };
 
@@ -20,13 +18,13 @@ exports.postAddProduct = (req, res, next) => {
     price: price,
     description: description,
     imageUrl: imageUrl,
-    userId: req.session.user
+    userId: req.user
   });
   product
     .save()
     .then(result => {
-      console.log('A product was just created!');
-      res.redirect('/admin/planets');
+      console.log('Product successfully created.');
+      res.redirect('/admin/products');
     })
     .catch(err => {
       console.log(err);
@@ -44,12 +42,11 @@ exports.getEditProduct = (req, res, next) => {
       if (!product) {
         return res.redirect('/');
       }
-      res.render('admin/edit-planet', {
+      res.render('admin/edit-product', {
         pageTitle: 'Edit Planet',
-        path: '/admin/edit-planet',
+        path: '/admin/edit-product',
         editing: editMode,
-        product: product,
-        isAuthenticated: req.session.isLoggedIn
+        product: product
       });
     })
     .catch(err => console.log(err));
@@ -71,8 +68,8 @@ exports.postEditProduct = (req, res, next) => {
       return product.save();
     })
     .then(result => {
-      console.log('A product got updated!');
-      res.redirect('/admin/planets');
+      console.log('Product successfully updated.');
+      res.redirect('/admin/products');
     })
     .catch(err => console.log(err));
 };
@@ -81,22 +78,20 @@ exports.getProducts = (req, res, next) => {
   Product.find()
     .then(products => {
       console.log(products);
-      res.render('admin/planets', {
+      res.render('admin/products', {
         prods: products,
         pageTitle: 'Admin Planets',
-        path: '/admin/planets',
-        isAuthenticated: req.session.isLoggedIn
+        path: '/admin/products'
       });
-    })
-    .catch(err => console.log(err));
+    }).catch(err => console.log(err));
 };
 
 exports.postDeleteProduct = (req, res, next) => {
   const prodId = req.body.productId;
   Product.findByIdAndRemove(prodId)
     .then(() => {
-      console.log('A product was deleted!');
-      res.redirect('/admin/planets');
+      console.log('Product successfully deleted.');
+      res.redirect('/admin/products');
     })
     .catch(err => console.log(err));
 };

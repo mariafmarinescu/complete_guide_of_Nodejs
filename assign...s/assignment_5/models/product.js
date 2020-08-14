@@ -26,5 +26,17 @@ const productSchema = new Schema({
   }
 });
 
+productSchema.pre('validate', function() {
+  console.log('valid - checked');
+});
+productSchema.post('validate', function() {
+  console.log('valid - known');
+});
+productSchema.pre('save', function() {
+  console.log('save - registered');
+});
+productSchema.post('save', function() {
+  console.log('saved successfully');
+});
 
 module.exports = mongoose.model('Product', productSchema);

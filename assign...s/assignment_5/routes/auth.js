@@ -4,7 +4,7 @@ const router = express.Router();
 
 const authController = require('../controllers/auth');
 
-const isLoggedIn = require("../middleware/isLoggedIn.js");
+// const isLoggedIn = require("../middleware/isLoggedIn.js");
 
 
 router.get('/login', authController.getLogin);

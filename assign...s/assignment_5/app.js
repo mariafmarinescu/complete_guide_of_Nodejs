@@ -7,9 +7,9 @@ const admin_MONGO_URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.M
 
 
 const express = require('express');
-const session = require('express-session');
+const session = require('client-sessions');
 const mongoose = require('mongoose');
-const MongoDBStore = require('connect-mongodb-session')(session);
+const MongoStore = require('connect-mongodb-session')(session);
 
 const User = require('./models/user');
 
@@ -18,22 +18,12 @@ const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 const authRoutes = require('./routes/auth');
 
-const isLoggedIn = require("./middleware/isLoggedIn.js");
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 
-const store = new MongoDBStore({
-  uri: admin_MONGO_URI,
-  collection: 'sessions'
-});
-
-app.use(session({
-  secret: 'hardcoded secret',
-  resave: false,
-  saveUninitialized: false,
-  store: store
-}));
+const store = new MongoStore({
+  uri: `${process.env.MONGO_CONNECTION_STR}`});
 
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -49,10 +39,35 @@ app.use(authRoutes);
 
   // })( req, res );
 // });
+const expiryDate = new Date(Date.now() + 60 * 60 * 1000);
+const sessionHandler = session({
+  secret : 'none',
+  rolling : true,
+  resave : true,
+  saveUninitialized : true
+  // name: 'session', 
+  // secret: 'hardcoded',
+  // keys: ['key1', 'key2'],
+  // store:  new MongoStore({ 
+  //   url: `${process.env.MONGO_CONNECTION_STR}`,
+  //   client: `${process.env.MONGO_USER}`,
+  //   dbName: `${process.env.DB_NAME}`,
+  //   autoRemove: 'disabled'
+  // }),
+  // cookie: {
+  //   secure: true, 
+  //   httpOnly: true, 
+  //   domain: 'localhost',
+  //   path: '/', 
+  //   expires: expiryDate,
+  // },
+});
+app.use(sessionHandler);
+app.use(express.static('client'));
 
 
 mongoose
-  .connect(admin_MONGO_URI)
+  .connect(`${process.env.MONGO_CONNECTION_STR}`)
   .then(result => {
     User.findOne().then(user => {
       if (!user) {
@@ -72,4 +87,18 @@ mongoose
   })
   .catch(err => {
     console.log(err);
+  });
+
+  app.post('/login', function(req, res) {
+    User.findOne({ email: req.body.email }, function(err, user) {
+      if (!user) {
+        res.render('login.jade', { error: 'Invalid email or password.' });
+      } else {
+        if (req.body.password === user.password) {
+          res.redirect('/dashboard');
+        } else {
+          res.render('login.jade', { error: 'Invalid email or password.' });
+        }
+      }
+    });
   });

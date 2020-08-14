@@ -52,9 +52,11 @@
             <a class="<%= path === '/admin/add-planet' ? 'active' : '' %>" href="/admin/add-planet">Add Planet
             </a>
         </li>
+        <% if (isAuthenticated) { %>
         <li class="mobile-nav__item">
             <a class="<%= path === '/admin/planets' ? 'active' : '' %>" href="/admin/planets">Planets Admin
             </a>
         </li>
+        <% } %>
     </ul>
 </nav>

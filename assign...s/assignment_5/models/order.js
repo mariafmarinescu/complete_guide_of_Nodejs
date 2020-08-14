@@ -22,5 +22,17 @@ const orderSchema = new Schema({
   }
 });
 
+orderSchema.pre('validate', function() {
+  console.log('valid - checked');
+});
+orderSchema.post('validate', function() {
+  console.log('valid - known');
+});
+orderSchema.pre('save', function() {
+  console.log('save - registered');
+});
+orderSchema.post('save', function() {
+  console.log('saved successfully');
+});
 
 module.exports = mongoose.model('Order', orderSchema);
