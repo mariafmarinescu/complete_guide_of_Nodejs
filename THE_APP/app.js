@@ -8,6 +8,7 @@ const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const csrf = require('csurf');
 const flash = require('connect-flash');
+const helmet = require('helmet')
 
 
 const dotenv = require('dotenv');
@@ -25,6 +26,7 @@ const cors = require('cors');
 const User = require('./models/user');
 
 const app = express();
+app.use(helmet())
 
 app.options('*', cors());
 
@@ -46,6 +48,10 @@ app.use(
     secret: `${process.env.secret}`,
     resave: false,
     saveUninitialized: false,
+    cookie: {
+      secure: true,
+      httpOnly: true
+    },
     store: store
   })
 );
