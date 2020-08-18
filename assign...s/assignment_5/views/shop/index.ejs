@@ -22,14 +22,14 @@
                             <p class="product__description"><%= product.description %></p>
                         </div>
                         <div class="card__actions">
-                                <a href="/planets/<%= product._id %>" class="btn">Details about this planet</a>
+                                <a href="/products/<%= product._id %>" class="btn">Details</a>
                             <%- include('../includes/add-to-cart.ejs', {product: product}) %>
                         </div>
                     </article>
                 <% } %>
             </div>
         <% } else { %>
-            <h1>No Planets Found!</h1>
+            <h1>No Products Found!</h1>
         <% } %>
     </main>
 <%- include('../includes/end.ejs') %>

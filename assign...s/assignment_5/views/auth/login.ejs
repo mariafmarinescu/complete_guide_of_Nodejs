@@ -1,25 +1,22 @@
 <%- include('../includes/head.ejs') %>
-<link rel="stylesheet" href="/css/forms.css">
-<link rel="stylesheet" href="/css/auth.css">
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="/css/auth.css">
 </head>
 
 <body>
-    <%- include('../includes/navigation.ejs') %>
+   <%- include('../includes/navigation.ejs') %>
 
     <main>
         <form class="login-form" action="/login" method="POST">
             <div class="form-control">
-                <div class="label-container">
-                    <label for="email">Please, give us your e-mail, sir!</label>
-                </div>
+                <label for="email">E-Mail</label>
                 <input type="email" name="email" id="email">
             </div>
             <div class="form-control">
-                <div class="label-container">
-                     <label for="password">Your password is required, mylord!</label>
-                </div>
-                    <input type="password" name="password" id="password">
-                <button class="btn" type="submit">Login now and redeem your planet!</button>
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password">
+            </div>
+            <button class="btn" type="submit">Login</button>
         </form>
     </main>
-    <%- include('../includes/end.ejs') %>
+<%- include('../includes/end.ejs') %>

@@ -8,11 +8,10 @@ exports.getProducts = (req, res, next) => {
       res.render('shop/planet-list', {
         prods: products,
         isAuthenticated: req.session.isloggedin,
-        pageTitle: 'All planets',
-        path: '/planets'
+        path: '/planets',
+        pageTitle: 'All planets'
       })
-    })
-    .catch(err => {
+    }).catch(err => {
       console.log(err);
     });
 };
@@ -23,12 +22,11 @@ exports.getProduct = (req, res, next) => {
     .then(product => {
       res.render('shop/planet-detail', {
         isAuthenticated: req.session.isloggedin,
+        path: '/planets',
         product: product,
-        pageTitle: product.title,
-        path: '/planets'
+        pageTitle: product.title
       });
-    })
-    .catch(err => console.log(err));
+    }).catch(err => console.log(err));
 };
 
 exports.getIndex = (req, res, next) => {
@@ -36,12 +34,11 @@ exports.getIndex = (req, res, next) => {
     .then(products => {
       res.render('shop/index', {
         isAuthenticated: req.session.isloggedin,
+        path: '/',
         prods: products,
-        pageTitle: 'Shop',
-        path: '/'
+        pageTitle: 'Shop'
       });
-    })
-    .catch(err => {
+    }).catch(err => {
       console.log(err);
     });
 };
@@ -107,8 +104,7 @@ exports.postOrder = (req, res, next) => {
     })
     .then(() => {
       res.redirect('/orders');
-    })
-    .catch(err => console.log(err));
+    }).catch(err => console.log(err));
 };
 
 exports.getOrders = (req, res, next) => {
@@ -120,6 +116,5 @@ exports.getOrders = (req, res, next) => {
         pageTitle: 'Your Orders',
         orders: orders      
       });
-    })
-    .catch(err => console.log(err));
+    }).catch(err => console.log(err));
 };

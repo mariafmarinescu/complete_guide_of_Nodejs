@@ -2,14 +2,14 @@ const User = require('../models/user');
 
 exports.getLogin = (req, res, next) => {
   res.render('auth/login', {
+    isAuthenticated: false,
     path: '/login',
-    pageTitle: 'Login',
-    isAuthenticated: false
+    pageTitle: 'Login'
   });
 };
 
 exports.postLogin = (req, res, next) => {
-  if (!user) {
+  if (!req.session.user) {
     const user = new User({
       name: 'PlanetKing',
       email: 'king@planet.com',
@@ -19,13 +19,11 @@ exports.postLogin = (req, res, next) => {
     });
     user.save();
   } else {
-
-  }
-  User.find(req.user)
-    .then(user => {
-      req.session.isloggedin = true;
-      req.session.user = user;
-      res.redirect('/');
-    })
-    .catch(err => console.log(err));
+      User.find(req.session.user)
+        .then(user => {
+          req.session.isloggedin = true;
+          req.session.user = user;
+          res.redirect('/');
+        }).catch(err => console.log(err));
+  };
 };

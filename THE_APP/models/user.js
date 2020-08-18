@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-
 const Schema = mongoose.Schema;
 
 
@@ -67,3 +66,4 @@ userSchema.methods.clearCart = function() {
 };
 
 module.exports = mongoose.model('User', userSchema);
+

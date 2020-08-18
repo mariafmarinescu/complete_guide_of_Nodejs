@@ -68,16 +68,16 @@ userSchema.methods.clearCart = function() {
 
 
 userSchema.pre('validate', function() {
-  console.log('valid - checked');
+  console.log('User valid - checked');
 });
 userSchema.post('validate', function() {
-  console.log('valid - known');
+  console.log('User valid - known');
 });
 userSchema.pre('save', function() {
-  console.log('save - registered');
+  console.log('User  - registered');
 });
 userSchema.post('save', function() {
-  console.log('saved successfully');
+  console.log('User saved successfully');
 });
 
 module.exports = mongoose.model('User', userSchema);

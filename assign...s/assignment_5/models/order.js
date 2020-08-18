@@ -23,16 +23,16 @@ const orderSchema = new Schema({
 });
 
 orderSchema.pre('validate', function() {
-  console.log('valid - checked');
+  console.log('order will be valid - checked');
 });
 orderSchema.post('validate', function() {
-  console.log('valid - known');
+  console.log('order is valid - known');
 });
 orderSchema.pre('save', function() {
-  console.log('save - registered');
+  console.log('order - registered');
 });
 orderSchema.post('save', function() {
-  console.log('saved successfully');
+  console.log('Order saved successfully');
 });
 
 module.exports = mongoose.model('Order', orderSchema);
