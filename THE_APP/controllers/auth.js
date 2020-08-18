@@ -12,7 +12,7 @@ const User = require('../models/user');
 const transporter = nodemailer.createTransport(
     sendgridTransport({
         auth: {
-            api_key: process.env.nodemailerAPI
+            api_key: process.env.NODEMAILER_API
         }
     })
 );
@@ -20,7 +20,7 @@ const transporter = nodemailer.createTransport(
 exports.getLogin = ( req, res, next ) => {
     let message = req.flash('error');
 
-    if(msg.length > 0) {
+    if(message.length > 0) {
         message = message[0];
     } else {
         message = null;
