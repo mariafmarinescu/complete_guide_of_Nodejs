@@ -1,4 +1,3 @@
-const mongoose = require('mongoose');
 const { validationResult } = require('express-validator/check');
 const fileHelper = require('../util/file');
 const dotenv = require('dotenv');
@@ -22,10 +21,13 @@ exports.getAddProduct = ( req, res, next ) => {
 
 
 exports.postAddProduct = ( req, res, next ) => {
-    const image = req.file;
-    const title = req.body.title, 
+    const image = req.body.file;
+    const imageUrl = image.path;
+    const title = req.body.title;
     const price = req.body.price;
     const description = req.body.description;
+    const errors = validationResult(req);
+
 
     if(!image) {
         return res.status(422).render('admin/edit-product', {
@@ -43,7 +45,6 @@ exports.postAddProduct = ( req, res, next ) => {
         });
     }
 
-    const errors = validationResult(req);
 
     if(!errors.isEmpty()) {
         console.log(errors.array());
@@ -61,7 +62,6 @@ exports.postAddProduct = ( req, res, next ) => {
         });
     }
 
-    const imageUrl = image.path;
     const product = new Product({
         userId: req.user, 
         imageUrl = imageUrl, 

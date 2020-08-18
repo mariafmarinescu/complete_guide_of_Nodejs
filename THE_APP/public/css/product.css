@@ -3,12 +3,17 @@
     max-width: 90%;
     margin: auto;
     display: block;
+    outline-color: white;
+    color: white;
 }
 
 .product-item {
     width: 20rem;
     max-width: 95%;
     margin: 1rem;
+    outline-color: white;
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .product__title {
@@ -18,7 +23,7 @@
 
 .product__price {
     text-align: center;
-    color: #4d4d4d;
+    color: white;
     margin-bottom: 0.5rem;
 }
 
