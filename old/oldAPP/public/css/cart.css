@@ -1,0 +1,144 @@
+main {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center; 
+}
+
+.cart_list:nth-child(1)::after {
+  content: "$i == 1";
+  color: #bf5540; 
+}
+
+.cart_list:nth-child(2)::after {
+  content: "$i == 2";
+  color: #bf6a40; 
+}
+
+.cart_list:nth-child(3)::after {
+  content: "$i == 3";
+  color: #bf8040; }
+
+.cart_list:nth-child(4)::after {
+  content: "$i == 4";
+  color: #bf9540; 
+}
+
+.cart_list:nth-child(5)::after {
+  content: "$i == 5";
+  color: #bfaa40; }
+
+.cart_list:nth-child(6)::after {
+  content: "$i == 6";
+  color: #bfbf40; 
+}
+
+.cart_list:nth-child(7)::after {
+  content: "$i == 7";
+  color: #aabf40; }
+
+.cart_list:nth-child(8)::after {
+  content: "$i == 8";
+  color: #95bf40; 
+}
+
+.cart_list:nth-child(9)::after {
+  content: "$i == 9";
+  color: #80bf40; 
+}
+
+.cart_list:nth-child(10)::after {
+  content: "$i == 10";
+  color: #6abf40; 
+}
+
+.cart_list:nth-child(11)::after {
+  content: "$i == 11";
+  color: #55bf40; 
+}
+
+.cart_list:nth-child(12)::after {
+  content: "$i == 12";
+  color: #40bf40; 
+}
+
+.cart_list:nth-child(13)::after {
+  content: "$i == 13";
+  color: #40bf55; 
+}
+
+.cart_list:nth-child(14)::after {
+  content: "$i == 14";
+  color: #40bf6a; 
+}
+
+.cart_list:nth-child(15)::after {
+  content: "$i == 15";
+  color: #40bf80; 
+}
+
+.cart_list:nth-child(16)::after {
+  content: "$i == 16";
+  color: #40bf95; 
+}
+
+.cart_list:nth-child(17)::after {
+  content: "$i == 17";
+  color: #40bfaa; 
+}
+
+.cart_list:nth-child(18)::after {
+  content: "$i == 18";
+  color: #40bfbf; 
+}
+
+.cart_list:nth-child(19)::after {
+  content: "$i == 19";
+  color: #40aabf; 
+}
+
+.cart_list:nth-child(20)::after {
+  content: "$i == 20";
+  color: #4095bf; 
+}
+
+.cart_list:nth-child(21)::after {
+  content: "$i == 21";
+  color: #4080bf; 
+}
+
+.cart_list:nth-child(22)::after {
+  content: "$i == 22";
+  color: #406abf; 
+}
+
+.cart_list:nth-child(23)::after {
+  content: "$i == 23";
+  color: #4055bf; 
+}
+
+.cart_list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin: auto;
+  width: 40rem;
+  max-width: 77%;
+  box-shadow: 5px 5px 10px purple, -7px -4px 4px green; 
+}
+
+.cart_item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1.7rem; 
+}
+
+.cart_item h2 {
+  margin-right: 0.7rem;
+  font-size: 1.2rem;
+  margin: 0; 
+}
