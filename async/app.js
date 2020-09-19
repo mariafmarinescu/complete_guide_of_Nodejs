@@ -65,7 +65,7 @@ const admin_URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_P
 mongoose
   .connect(admin_URI)
   .then(result => {
-app.listen(
+    app.listen(
       `${process.env.PORT}`, 
       () => console.log(`This simple app is listening on port ${process.env.PORT}!`));  })
-  .catch(err => console.log(err));
+  .catch(e => console.log(e));
